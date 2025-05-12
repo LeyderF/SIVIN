@@ -16,7 +16,7 @@ public class Conexion {
         
         try {
             
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sivin", "root", "S1V1N234@");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/bd_sivin", "root", "user");
             return cn;
             
         } catch (SQLException e) {
@@ -24,5 +24,10 @@ public class Conexion {
         }
         return null;
     }
+
+    public static com.mysql.jdbc.Connection conecta() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
             
 }
+

@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import modelo.Cliente;
-import modelo.Producto;
 
 /**
  *
@@ -45,7 +44,7 @@ public class Ctrl_Cliente {
         return respuesta;
     }
 
-    //Para consultar si el producto y existe
+    //Para consultar si el cliente existe
     public boolean existeCliente(String cedula) {
         boolean respuesta = false;
         String sql = "select cedula from tb_cliente where cedula = '" + cedula + "';";

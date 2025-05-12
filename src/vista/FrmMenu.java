@@ -72,12 +72,22 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem_nuevoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add-user.png"))); // NOI18N
         jMenuItem_nuevoUsuario.setText("Nuevo Usuario");
         jMenuItem_nuevoUsuario.setPreferredSize(new java.awt.Dimension(200, 35));
+        jMenuItem_nuevoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_nuevoUsuarioActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem_nuevoUsuario);
 
         jMenuItem_gestionarUsuarios.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         jMenuItem_gestionarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cogwheel.png"))); // NOI18N
         jMenuItem_gestionarUsuarios.setText("Gestionar Usuarios");
         jMenuItem_gestionarUsuarios.setPreferredSize(new java.awt.Dimension(200, 35));
+        jMenuItem_gestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_gestionarUsuariosActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem_gestionarUsuarios);
 
         jMenuBar1.add(jMenu1);
@@ -189,12 +199,22 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem_nuevaVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/package-receipt.png"))); // NOI18N
         jMenuItem_nuevaVenta.setText("Nueva Venta");
         jMenuItem_nuevaVenta.setPreferredSize(new java.awt.Dimension(200, 35));
+        jMenuItem_nuevaVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_nuevaVentaActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem_nuevaVenta);
 
         jMenuItem_gestionarVentas.setFont(new java.awt.Font("Inter", 0, 13)); // NOI18N
         jMenuItem_gestionarVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/money-management.png"))); // NOI18N
         jMenuItem_gestionarVentas.setText("Gestionar Ventas");
         jMenuItem_gestionarVentas.setPreferredSize(new java.awt.Dimension(200, 35));
+        jMenuItem_gestionarVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_gestionarVentasActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem_gestionarVentas);
 
         jMenuBar1.add(jMenu5);
@@ -332,6 +352,29 @@ public class FrmMenu extends javax.swing.JFrame {
         jDesktopPane_menu.add(interGestionarCliente);
         interGestionarCliente.setVisible(true);
     }//GEN-LAST:event_jMenuItem_gestionarClientesActionPerformed
+
+    private void jMenuItem_nuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevoUsuarioActionPerformed
+        // TODO add your handling code here:
+        InterUsuario interUsuario = new InterUsuario();
+        jDesktopPane_menu.add(interUsuario);
+        interUsuario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_nuevoUsuarioActionPerformed
+
+    private void jMenuItem_gestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionarUsuariosActionPerformed
+        InterGestionarUsuario interGestionarUsuario = new InterGestionarUsuario();
+        jDesktopPane_menu.add(interGestionarUsuario);
+        interGestionarUsuario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_gestionarUsuariosActionPerformed
+
+    private void jMenuItem_nuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevaVentaActionPerformed
+        InterFacturacion interFacturacion = new InterFacturacion();
+        jDesktopPane_menu.add(interFacturacion);
+        interFacturacion.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_nuevaVentaActionPerformed
+
+    private void jMenuItem_gestionarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionarVentasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem_gestionarVentasActionPerformed
 
     /**
      * @param args the command line arguments
