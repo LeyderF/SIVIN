@@ -21,6 +21,8 @@ public class Ctrl_RegistrarVenta {
      * **************************************************
      * metodo para guardar la cabecera de venta
      * **************************************************
+     * @param objeto
+     * @return 
      */
     public boolean guardar(CabeceraVenta objeto) {
         boolean respuesta = false;
@@ -55,6 +57,8 @@ public class Ctrl_RegistrarVenta {
      * **************************************************
      * metodo para guardar el detalle de venta
      * **************************************************
+     * @param objeto
+     * @return 
      */
     public boolean guardarDetalle(DetalleVenta objeto) {
         boolean respuesta = false;
@@ -71,7 +75,7 @@ public class Ctrl_RegistrarVenta {
             consulta.setDouble(8, objeto.getIva());
             consulta.setDouble(9, objeto.getTotalPagar());
             consulta.setInt(10, objeto.getEstado());
-            
+    
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
             }

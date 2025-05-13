@@ -496,7 +496,7 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton_buscar_clienteActionPerformed
 
     private void jButton_añadir_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_añadir_productoActionPerformed
-        String combo = this.jComboBox_producto.getSelectedItem().toString();
+            String combo = this.jComboBox_producto.getSelectedItem().toString();
         //validar seleccione producto
         if (combo.equalsIgnoreCase("Seleccione producto")) {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
@@ -520,13 +520,14 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
                             subtotal = (double) Math.round(subtotal * 100) / 100; //redondear
                             iva = (double) Math.round(iva * 100) / 100; //redondear
+                            
                             descuento = (double) Math.round(descuento * 100) / 100; //redondear
                             totalPagar = (double) Math.round(totalPagar * 100) / 100; //redondear
 
                             //nuevo producto
                             producto = new DetalleVenta(auxIdDetalle, 1, idProducto, nombre, Integer.parseInt(txt_cantidad.getText()), precioUnitario, subtotal, descuento, iva, totalPagar, 1);
                             listaProductos.add(producto);
-                            JOptionPane.showMessageDialog(null, "Producton agregado");
+                            JOptionPane.showMessageDialog(null, "Producto agregado");
                             auxIdDetalle++;
                             txt_cantidad.setText(""); //limpiar campo 
                             //volver a cargar combo productos
@@ -559,10 +560,11 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jLabel_wallpaperMouseClicked
 
-    int idArrayList = 0;
+    
     private void jTable_productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_productosMouseClicked
         int fila_point = jTable_productos.rowAtPoint(evt.getPoint());
         int columna_point = 0;
+        int idArrayList = 0;
 
         if (fila_point > -1) {
             idArrayList = (int) modeloDatosProductos.getValueAt(fila_point, columna_point);
@@ -570,17 +572,19 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         int opcion = JOptionPane.showConfirmDialog(null, "¿Seguro a eliminar el producto?");
         //opciones de  confir dialog - (si = 0, no = 1, cancelar = 2, close = -1
         switch (opcion) {
-            case 0: //si
+            case 0 -> {
+                //si
                 listaProductos.remove(idArrayList = 1);
                 this.CalcularTotalPagar();
                 this.ListaTablaProductos();
-                break;
-            case 1:  //no
-                break;
-            default:
-                break;
+            }
+            case 1 -> {
+            }
+            default -> {
+            }
         }
-
+        //no
+        
     }//GEN-LAST:event_jTable_productosMouseClicked
 
     private void jButton_RegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistrarVentaActionPerformed
@@ -589,12 +593,12 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
         DetalleVenta detalleVenta = new DetalleVenta();
         Ctrl_RegistrarVenta controlVenta = new Ctrl_RegistrarVenta();
 
-        String fechaActual = "";
+        String fechaActual;
         Date date = new Date();
         fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
 
         if (!jComboBox_cliente.getSelectedItem().equals("Seleccione cliente:")) {
-            if (listaProductos.size() > 0) {
+            if (!listaProductos.isEmpty()) {
 
                 //Metodo obtener id del cliente
                 this.ObtenerIdCliente();
@@ -610,17 +614,6 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
                     //guardar detalle
                     for (DetalleVenta elemento : listaProductos) {
-                        detalleVenta.setIdDetalleVenta(0);
-                        detalleVenta.setIdCabeceraVenta(0);
-                        detalleVenta.setIdProducto(elemento.getIdProducto());
-                        detalleVenta.setCantidad(elemento.getCantidad());
-                        detalleVenta.setPrecioUnitario(elemento.getPrecioUnitario());
-                        detalleVenta.setSubTotal(elemento.getSubTotal());
-                        detalleVenta.setDescuento(elemento.getDescuento());
-                        detalleVenta.setIva(elemento.getIva());
-                        detalleVenta.setTotalPagar(elemento.getTotalPagar());
-                        detalleVenta.setEstado(1);
-
                         if (controlVenta.guardarDetalle(detalleVenta)) {
                             //System.out.println("Detalle de venta registrado");
 
@@ -638,6 +631,17 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
                         } else {
                             JOptionPane.showMessageDialog(null, "Error al guardar detalle venta");
                         }
+                        detalleVenta.setIdDetalleVenta(0);
+                        detalleVenta.setIdCabeceraVenta(0);
+                        detalleVenta.setIdProducto(elemento.getIdProducto());
+                        detalleVenta.setCantidad(elemento.getCantidad());
+                        detalleVenta.setPrecioUnitario(elemento.getPrecioUnitario());
+                        detalleVenta.setSubTotal(elemento.getSubTotal());
+                        detalleVenta.setDescuento(elemento.getDescuento());
+                        detalleVenta.setIva(elemento.getIva());
+                        detalleVenta.setTotalPagar(elemento.getTotalPagar());
+                        detalleVenta.setEstado(1);
+
                     }
                     //vaciamos la lista
                     listaProductos.clear();
@@ -720,8 +724,8 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
                 nombre = rs.getString("nombre");
                 cantidadProductoBBDD = rs.getInt("cantidad");
                 precioUnitario = rs.getDouble("precio");
-                porcentajeIva = rs.getInt("porcentajeIva");
-                this.CalcularIva(precioUnitario, porcentajeIva);
+                iva = rs.getDouble("PorcentajeIVA");
+                this.CalcularIva(precioUnitario, iva);
 
             }
         } catch (SQLException e) {
@@ -730,20 +734,14 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
     }
 
     //Calcular iva
-    private double CalcularIva(double precio, int pocentajeIva) {
-        int p_iva = porcentajeIva;
+    private double CalcularIva(double precio, double piva) {
+        int p_iva = (int) piva;
         switch (p_iva) {
-            case 0:
-                iva = 0.0;
-                break;
-            case 12:
-                iva = (precio * cantidad) * 0.12;
-                break;
-            case 14:
-                iva = (precio * cantidad) * 0.14;
-                break;
-            default:
-                break;
+            case 0 -> iva = 0.0;
+            case 5 -> iva = (precio * cantidad) * 0.05;
+            case 19 -> iva = (precio * cantidad) * 0.19;
+            default -> {
+            }
         }
         return iva;
     }
@@ -796,7 +794,8 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
     private void RestarStockProductos(int idProducto, int cantidad) {
         int cantidadProductosBaseDatos = 0;
         try {
-            Connection cn = Conexion.conecta();
+            Connection cn;
+            cn = Conexion.conecta();
             String sql = "select idProducto, cantidad from tb_producto where idProducto = '" + idProducto + "'";
             Statement st;
             st = (Statement) cn.createStatement();
@@ -812,9 +811,10 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
 
         try {
             Connection cn = Conexion.conecta();
-            PreparedStatement consulta = (PreparedStatement) cn.prepareStatement("update tb_producto set cantidad=? where idProducto = '" + idProducto + "'");
+            PreparedStatement consulta = (PreparedStatement) cn.prepareStatement("UPDATE tb_producto SET cantidad = ? WHERE idProducto = ?");
             int cantidadNueva = cantidadProductosBaseDatos - cantidad;
             consulta.setInt(1, cantidadNueva);
+            consulta.setInt(2, idProducto); 
 
             if (consulta.executeUpdate() > 0) {
                 System.out.println("Todo bien");

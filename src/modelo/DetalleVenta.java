@@ -5,7 +5,6 @@ package modelo;
  * @author kzamb
  */
 public class DetalleVenta {
-
     //atributes 
     private int idDetalleVenta;
     private int idCabeceraVenta;
