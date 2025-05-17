@@ -8,8 +8,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import modelo.Usuario;
 
-
-
 public class FrmLogin extends javax.swing.JFrame {
 
     /**
@@ -45,6 +43,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new RoundedButton("Iniciar Sesion");
+        txt_registrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,6 +57,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
         jButton2.setText("Cerrar");
+        jButton2.setBorder(null);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -73,7 +73,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jButton2)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -81,8 +81,8 @@ public class FrmLogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
 
@@ -155,6 +155,16 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
+        txt_registrar.setBackground(new java.awt.Color(27, 170, 237));
+        txt_registrar.setForeground(new java.awt.Color(255, 255, 255));
+        txt_registrar.setText("Registrate");
+        txt_registrar.setBorder(null);
+        txt_registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_registrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -175,7 +185,10 @@ public class FrmLogin extends javax.swing.JFrame {
                         .addGap(52, 52, 52))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(txt_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,8 +204,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -217,167 +232,161 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
     public class RoundedPasswordField extends JPasswordField {
 
-    private int roundness = 10;
+        private int roundness = 10;
 
-    public RoundedPasswordField(int columns) {
-        super(columns);
-        setOpaque(false);
-        setBorder(new EmptyBorder(5, 10, 5, 10)); // Padding interno
+        public RoundedPasswordField(int columns) {
+            super(columns);
+            setOpaque(false);
+            setBorder(new EmptyBorder(5, 10, 5, 10)); // Padding interno
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            // Fondo
+            g2.setColor(getBackground());
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), roundness, roundness);
+
+            super.paintComponent(g);
+            g2.dispose();
+        }
+
+        @Override
+        protected void paintBorder(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setColor(Color.GRAY);
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, roundness, roundness);
+            g2.dispose();
+        }
+
+        public void setRoundness(int roundness) {
+            this.roundness = roundness;
+            repaint();
+        }
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Fondo
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), roundness, roundness);
-
-        super.paintComponent(g);
-        g2.dispose();
-    }
-
-    @Override
-    protected void paintBorder(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setColor(Color.GRAY);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, roundness, roundness);
-        g2.dispose();
-    }
-
-    public void setRoundness(int roundness) {
-        this.roundness = roundness;
-        repaint();
-    }
-}
-    
-    
     public class RoundedTextField extends JTextField {
 
-    private int roundness = 10;
+        private int roundness = 10;
 
-    public RoundedTextField(int columns) {
-        super(columns);
-        setOpaque(false);
-        setBorder(new EmptyBorder(5, 10, 5, 10)); // Padding inside the field
+        public RoundedTextField(int columns) {
+            super(columns);
+            setOpaque(false);
+            setBorder(new EmptyBorder(5, 10, 5, 10)); // Padding inside the field
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            // Background
+            g2.setColor(getBackground());
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), roundness, roundness);
+
+            super.paintComponent(g);
+            g2.dispose();
+        }
+
+        @Override
+        protected void paintBorder(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setColor(Color.GRAY);
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, roundness, roundness);
+            g2.dispose();
+        }
+
+        public void setRoundness(int roundness) {
+            this.roundness = roundness;
+            repaint();
+        }
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Background
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), roundness, roundness);
-
-        super.paintComponent(g);
-        g2.dispose();
-    }
-
-    @Override
-    protected void paintBorder(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setColor(Color.GRAY);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, roundness, roundness);
-        g2.dispose();
-    }
-
-    public void setRoundness(int roundness) {
-        this.roundness = roundness;
-        repaint();
-    }
-}
-    
     public class RoundedPanel extends JPanel {
 
-    private int roundness = 30; // Adjust this for more/less rounded corners
+        private int roundness = 30; // Adjust this for more/less rounded corners
 
-    public RoundedPanel() {
-        setOpaque(false); // Make sure the panel has transparency
+        public RoundedPanel() {
+            setOpaque(false); // Make sure the panel has transparency
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            // Fill rounded rectangle with background color
+            g2.setColor(getBackground());
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
+
+            super.paintComponent(g);
+            g2.dispose();
+        }
+
+        // Setter to dynamically change roundness
+        public void setRoundness(int roundness) {
+            this.roundness = roundness;
+            repaint();
+        }
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Fill rounded rectangle with background color
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
-
-        super.paintComponent(g);
-        g2.dispose();
-    }
-
-    // Setter to dynamically change roundness
-    public void setRoundness(int roundness) {
-        this.roundness = roundness;
-        repaint();
-    }
-}
-    
-    
     public class RoundedButton extends JButton {
 
-    public RoundedButton(String text) {
-        super(text);
-        setContentAreaFilled(false);
-        setFocusPainted(false);
-        setBorderPainted(false);
-        setForeground(Color.WHITE);
-        setBackground(new Color(66, 135, 245));
-        setFont(new Font("Segoe UI", Font.BOLD, 14));
+        public RoundedButton(String text) {
+            super(text);
+            setContentAreaFilled(false);
+            setFocusPainted(false);
+            setBorderPainted(false);
+            setForeground(Color.WHITE);
+            setBackground(new Color(66, 135, 245));
+            setFont(new Font("Segoe UI", Font.BOLD, 14));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            // Fill the rounded rectangle with background color
+            g2.setColor(getBackground());
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
+
+            // Draw the text
+            super.paintComponent(g);
+            g2.dispose();
+        }
+
+        @Override
+        public void paintBorder(Graphics g) {
+            // Optional: add border drawing if you want
+        }
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        // Fill the rounded rectangle with background color
-        g2.setColor(getBackground());
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 25, 25);
-
-        // Draw the text
-        super.paintComponent(g);
-        g2.dispose();
-    }
-
-    @Override
-    public void paintBorder(Graphics g) {
-        // Optional: add border drawing if you want
-    }
-}
     private void txt_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_usuarioActionPerformed
 
     private void txt_usuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usuarioFocusGained
         // TODO add your handling code here:
-        if(txt_usuario.getText().equals("Ingrese el Usuario"))
-        {
+        if (txt_usuario.getText().equals("Ingrese el Usuario")) {
             txt_usuario.setText("");
-            txt_usuario.setForeground(new Color (130,130,130));
+            txt_usuario.setForeground(new Color(130, 130, 130));
         }
     }//GEN-LAST:event_txt_usuarioFocusGained
 
     private void txt_usuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_usuarioFocusLost
         // TODO add your handling code here:
-        if(txt_usuario.getText().equals(""))
-        {
+        if (txt_usuario.getText().equals("")) {
             txt_usuario.setText("Ingrese el Usuario");
-            txt_usuario.setForeground(new Color (130,130,130));
+            txt_usuario.setForeground(new Color(130, 130, 130));
         }
     }//GEN-LAST:event_txt_usuarioFocusLost
 
@@ -386,7 +395,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_passwordFocusGained
 
     private void txt_passwordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_passwordFocusLost
-        
+
     }//GEN-LAST:event_txt_passwordFocusLost
 
     private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
@@ -400,24 +409,30 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.Login();
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== evt.VK_ENTER ){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             txt_password.requestFocus();
         }
-        
+
     }//GEN-LAST:event_txt_usuarioKeyPressed
 
     private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode()== evt.VK_ENTER ){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             this.Login();
         }
     }//GEN-LAST:event_txt_passwordKeyPressed
+
+    private void txt_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_registrarActionPerformed
+        FrmRegistrar registrar = new FrmRegistrar();  // Crea una instancia del formulario
+        registrar.setVisible(true);                  // Haz visible el formulario
+        registrar.setLocationRelativeTo(null);
+    }//GEN-LAST:event_txt_registrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,32 +480,33 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField txt_password;
+    private javax.swing.JButton txt_registrar;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 
-        //
-    private void Login(){
-        if(!txt_usuario.getText().isEmpty() && !txt_password.getText().isEmpty() ){
-        
+    //
+    private void Login() {
+        if (!txt_usuario.getText().isEmpty() && !txt_password.getText().isEmpty()) {
+
             Ctrl_Usuario controlUsuario = new Ctrl_Usuario();
             Usuario usuario = new Usuario();
             usuario.setUsuario(txt_usuario.getText().trim());
             usuario.setPassword(txt_password.getText().trim());
-            if(controlUsuario.loginUser(usuario)){
-            //JOptionPane.showMessageDialog(null, "Usuario correcto :D");
-            
-            FrmMenu menu = new FrmMenu();
-            menu.setVisible(true);
-            this.dispose();
-            
-            }else{
-            JOptionPane.showMessageDialog(null, "Usuario incorrecto");
+            if (controlUsuario.loginUser(usuario)) {
+                //JOptionPane.showMessageDialog(null, "Usuario correcto :D");
+
+                FrmMenu menu = new FrmMenu();
+                menu.setVisible(true);
+                this.dispose();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario incorrecto");
             }
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "Ingrese sus credenciales");
         }
-        
+
     }
-       
+
 }

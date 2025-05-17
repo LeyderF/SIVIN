@@ -1,45 +1,44 @@
-
 package modelo;
 
 /**
- *
- * @author kzamb
+ * @author Taszka
  */
 public class CabeceraVenta {
-    //atributos
-    private int idCabeceraVenta;
+    
+    //Atributos
+    private int idCabeceraventa;
     private int idCliente;
-    private String fechaVenta;
     private double valorPagar;
+    private String fechaVenta;
     private int estado;
     
     //constructor
     public CabeceraVenta(){
-        this.idCabeceraVenta = 0;
+        this.idCabeceraventa = 0;
         this.idCliente = 0;
         this.valorPagar = 0.0;
         this.fechaVenta = "";
         this.estado = 0;
     }
     
-    //constructor sobrecargado
+     //constructor sobrecargado
 
-    public CabeceraVenta(int idCabeceraVenta, int idCliente, String fechaVenta, double valorPagar, int estado) {
-        this.idCabeceraVenta = idCabeceraVenta;
+    public CabeceraVenta(int idCabeceraventa, int idCliente, double valorPagar, String fechaVenta, int estado) {
+        this.idCabeceraventa = idCabeceraventa;
         this.idCliente = idCliente;
-        this.fechaVenta = fechaVenta;
         this.valorPagar = valorPagar;
+        this.fechaVenta = fechaVenta;
         this.estado = estado;
     }
     
-    // get and select
+    //get and set 
 
-    public int getIdCabeceraVenta() {
-        return idCabeceraVenta;
+    public int getIdCabeceraventa() {
+        return idCabeceraventa;
     }
 
-    public void setIdCabeceraVenta(int idCabeceraVenta) {
-        this.idCabeceraVenta = idCabeceraVenta;
+    public void setIdCabeceraventa(int idCabeceraventa) {
+        this.idCabeceraventa = idCabeceraventa;
     }
 
     public int getIdCliente() {
@@ -50,20 +49,20 @@ public class CabeceraVenta {
         this.idCliente = idCliente;
     }
 
-    public String getFechaVenta() {
-        return fechaVenta;
-    }
-
-    public void setFechaVenta(String fechaVenta) {
-        this.fechaVenta = fechaVenta;
-    }
-
     public double getValorPagar() {
         return valorPagar;
     }
 
     public void setValorPagar(double valorPagar) {
         this.valorPagar = valorPagar;
+    }
+
+    public String getFechaVenta() {
+        return fechaVenta;
+    }
+
+    public void setFechaVenta(String fechaVenta) {
+        this.fechaVenta = fechaVenta;
     }
 
     public int getEstado() {
@@ -74,15 +73,11 @@ public class CabeceraVenta {
         this.estado = estado;
     }
     
-    //toString
+    //toString 
 
     @Override
     public String toString() {
-        return "CabeceraVenta{" + "idCabeceraVenta=" + idCabeceraVenta + ", idCliente=" + idCliente + ", fechaVenta=" + fechaVenta + ", valorPagar=" + valorPagar + ", estado=" + estado + '}';
-    }
-
-    public void setIdCabeceraventa(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "CabeceraVenta{" + "idCabeceraventa=" + idCabeceraventa + ", idCliente=" + idCliente + ", valorPagar=" + valorPagar + ", fechaVenta=" + fechaVenta + ", estado=" + estado + '}';
     }
     
     

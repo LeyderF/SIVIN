@@ -5,39 +5,41 @@ package modelo;
  * @author Taszka
  */
 public class Producto {
-    //atributos de la clase
+    
+    //Atributos
     private int idProducto;
     private String nombre;
     private int cantidad;
     private double precio;
     private String descripcion;
-    private int porcentajeIVA;
+    private int porcentajeIva;
     private int idCategoria;
     private int estado;
     
-    //constructor
+    //Contructor
     public Producto(){
         this.idProducto = 0;
         this.nombre = "";
         this.cantidad = 0;
-        this.precio = 0;
+        this.precio = 0.0;
         this.descripcion = "";
-        this.porcentajeIVA = 0;
+        this.porcentajeIva = 0;
         this.idCategoria = 0;
         this.estado = 0;
     }
-    //constructor sobrecargado
-    public Producto(int idProducto, String nombre, int cantidad, double precio, String descripcion, int porcentajeIVA, int idCategoria, int estado) {
+    //Contructor sobrecargado
+    public Producto(int idProducto, String nombre, int cantidad, double precio, String descripcion, int porcentajeIva, int idCategoria, int estado) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
         this.descripcion = descripcion;
-        this.porcentajeIVA = porcentajeIVA;
+        this.porcentajeIva = porcentajeIva;
         this.idCategoria = idCategoria;
         this.estado = estado;
     }
-    //set and get
+    
+    //Set and get
 
     public int getIdProducto() {
         return idProducto;
@@ -79,12 +81,12 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public int getPorcentajeIVA() {
-        return porcentajeIVA;
+    public int getPorcentajeIva() {
+        return porcentajeIva;
     }
 
-    public void setPorcentajeIVA(int porcentajeIVA) {
-        this.porcentajeIVA = porcentajeIVA;
+    public void setPorcentajeIva(int porcentajeIva) {
+        this.porcentajeIva = porcentajeIva;
     }
 
     public int getIdCategoria() {
@@ -102,6 +104,7 @@ public class Producto {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+    
     
     
     

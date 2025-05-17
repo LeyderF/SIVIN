@@ -1,14 +1,15 @@
 package modelo;
 
 /**
- *
- * @author kzamb
+ * @author Taszka
  */
 public class DetalleVenta {
-    //atributes 
+
+    //Atributos
     private int idDetalleVenta;
     private int idCabeceraVenta;
     private int idProducto;
+    //esta de mas
     private String nombre;
     private int cantidad;
     private double precioUnitario;
@@ -18,7 +19,7 @@ public class DetalleVenta {
     private double totalPagar;
     private int estado;
 
-    //constructores
+    //Contructor
     public DetalleVenta() {
         this.idDetalleVenta = 0;
         this.idCabeceraVenta = 0;
@@ -33,7 +34,8 @@ public class DetalleVenta {
         this.estado = 0;
     }
     
-    //constructor sobrecargado
+    //Contructor sobrebargado
+
     public DetalleVenta(int idDetalleVenta, int idCabeceraVenta, int idProducto, String nombre, int cantidad, double precioUnitario, double subTotal, double descuento, double iva, double totalPagar, int estado) {
         this.idDetalleVenta = idDetalleVenta;
         this.idCabeceraVenta = idCabeceraVenta;
@@ -48,7 +50,8 @@ public class DetalleVenta {
         this.estado = estado;
     }
     
-    //get and sellect
+    //get and set
+
     public int getIdDetalleVenta() {
         return idDetalleVenta;
     }
@@ -143,7 +146,6 @@ public class DetalleVenta {
     public String toString() {
         return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", idCabeceraVenta=" + idCabeceraVenta + ", idProducto=" + idProducto + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precioUnitario=" + precioUnitario + ", subTotal=" + subTotal + ", descuento=" + descuento + ", iva=" + iva + ", totalPagar=" + totalPagar + ", estado=" + estado + '}';
     }
-      
     
 
 }

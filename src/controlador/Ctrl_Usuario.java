@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  * @author Taszka
  */
 public class Ctrl_Usuario {
-    
+
     //guardar nuevo usuario
     public boolean guardar(Usuario objeto) {
         boolean respuesta = false;
@@ -60,8 +60,7 @@ public class Ctrl_Usuario {
         }
         return respuesta;
     }
-    
-    
+
     //actualizar usuario
     public boolean actualizar(Usuario objeto, int idUsuario) {
 
@@ -115,7 +114,47 @@ public class Ctrl_Usuario {
         return respuesta;
     }
 
-    //metodo para log in
+    //registrar 
+    public boolean registrar(Usuario usuario) {
+        boolean registrado = false;
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = Conexion.conectar();
+            String sql = "INSERT INTO tb_usuario (nombre, apellido, usuario, password, telefono, estado) VALUES (?, ?, ?, ?, ?, ?)";
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getApellido());
+            ps.setString(3, usuario.getUsuario());
+            ps.setString(4, usuario.getPassword());
+            ps.setString(5, usuario.getTelefono());
+            ps.setInt(6, usuario.getEstado()); // 1 para activo
+
+            if (ps.executeUpdate() > 0) {
+                registrado = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al registrar usuario: " + e);
+            e.printStackTrace(); // para ver el error exacto en consola
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al cerrar conexión: " + e);
+            }
+        }
+
+        return registrado;
+    }
+
+    //metodo para login
     public boolean loginUser(Usuario objeto) {
 
         boolean respuesta = false;
@@ -138,7 +177,6 @@ public class Ctrl_Usuario {
             JOptionPane.showMessageDialog(null, "Erorr al iniciar sesion");
         }
 
-        
         return respuesta;
     }
 

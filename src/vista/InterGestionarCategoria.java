@@ -6,13 +6,13 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
-import javax.swing.table.DefaultTableModel;
-import java.sql.Statement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import javax.swing.JTable;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
 
 /**
@@ -20,19 +20,16 @@ import modelo.Categoria;
  * @author Taszka
  */
 public class InterGestionarCategoria extends javax.swing.JInternalFrame {
-    
+
     private int idCategoria;
 
-    
     public InterGestionarCategoria() {
         initComponents();
-        this.setSize(new Dimension(600,400));
-        this.setTitle("Gestionar Categoría");
-        
+        this.setSize(new Dimension(600, 400));
+        this.setTitle("Gestionar Categorias");
+        //Cargar tabla
         this.CargarTablaCategorias();
-        
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,7 +56,7 @@ public class InterGestionarCategoria extends javax.swing.JInternalFrame {
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Administrar Categorias");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
@@ -90,7 +87,7 @@ public class InterGestionarCategoria extends javax.swing.JInternalFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton_actualizar.setBackground(new java.awt.Color(51, 204, 0));
-        jButton_actualizar.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
+        jButton_actualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_actualizar.setText("Actualizar");
         jButton_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,81 +96,72 @@ public class InterGestionarCategoria extends javax.swing.JInternalFrame {
         });
         jPanel2.add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jButton_eliminar.setBackground(new java.awt.Color(251, 51, 51));
-        jButton_eliminar.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
+        jButton_eliminar.setBackground(new java.awt.Color(255, 51, 51));
+        jButton_eliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_eliminar.setText("Eliminar");
-        jButton_eliminar.setMaximumSize(new java.awt.Dimension(92, 22));
-        jButton_eliminar.setPreferredSize(new java.awt.Dimension(92, 23));
         jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_eliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, -1));
+        jPanel2.add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 90, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 130, 90));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 130, 80));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText("Descripcion: ");
+        jLabel2.setText("Descripcion:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        txt_descripcion.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        txt_descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 170, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, 190, 80));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 360));
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_actualizarActionPerformed
-        
-        if(!txt_descripcion.getText().isEmpty()){
+        if (!txt_descripcion.getText().isEmpty()) {
             Categoria categoria = new Categoria();
             Ctrl_Categoria controlCategoria = new Ctrl_Categoria();
-            
-            categoria.setDescripción(txt_descripcion.getText().trim());
-            if(controlCategoria.actualizar(categoria, idCategoria)){
-                JOptionPane.showMessageDialog(null, "Categoria actualizada ");
+
+            categoria.setDescripcion(txt_descripcion.getText().trim());
+            if (controlCategoria.actualizar(categoria, idCategoria)) {
+                JOptionPane.showMessageDialog(null, "Categoria Actulizada");
                 txt_descripcion.setText("");
                 this.CargarTablaCategorias();
-            }else{
-            JOptionPane.showMessageDialog(null, "Error al actualizar categoria");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar Categoria");
             }
-            
-            
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione una categoria");
         }
-        
     }//GEN-LAST:event_jButton_actualizarActionPerformed
 
     private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
-        if(!txt_descripcion.getText().isEmpty()){
+        if (!txt_descripcion.getText().isEmpty()) {
             Categoria categoria = new Categoria();
             Ctrl_Categoria controlCategoria = new Ctrl_Categoria();
-              
-            categoria.setDescripción(txt_descripcion.getText().trim());
-            if(!controlCategoria.eliminar(idCategoria)){
-                JOptionPane.showMessageDialog(null, "Categoria eliminada ");
+
+            categoria.setDescripcion(txt_descripcion.getText().trim());
+            if (!controlCategoria.eliminar(idCategoria)) {
+                JOptionPane.showMessageDialog(null, "Categoria Eliminada");
                 txt_descripcion.setText("");
                 this.CargarTablaCategorias();
-            }else{
-            JOptionPane.showMessageDialog(null, "Error al eliminar categoria");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al Eliminar Categoria");
             }
-            
-            
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione una categoria");
         }
-        
     }//GEN-LAST:event_jButton_eliminarActionPerformed
 
 
@@ -191,85 +179,70 @@ public class InterGestionarCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_descripcion;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * 
-     * metodo para mostrar todas las caracteristicas registradas
-     * 
+    /*
+     * *****************************************************
+     * metodo para mostrar todos las categorias registradas
+     * *****************************************************
      */
-   private void CargarTablaCategorias(){
-   
-       Connection con = Conexion.conectar();
-       DefaultTableModel model = new DefaultTableModel();
-       String sql = "select idCategoria, descripcion, estado from tb_categoria;";
-       Statement st;
-       
-       try {
-           
-           st = con.createStatement();
-           ResultSet rs = st.executeQuery(sql);
-           InterGestionarCategoria.jTable_categorias = new JTable(model);
-           InterGestionarCategoria.jScrollPane1.setViewportView(InterGestionarCategoria.jTable_categorias);
-           
-           model.addColumn("idCategoria");
-           model.addColumn("descripcion");
-           model.addColumn("estado");
-           
-           while(rs.next()){
-           
-               Object fila[] = new Object[3];
-               
-               for(int i = 0; i < 3; i++){
-                   
-                   fila[i] = rs.getObject(i + 1);
-               }
-               model.addRow(fila);
-           }
-           
-           con.close();
-           
-       } catch (SQLException e) {
-           System.out.println("Error al llenar la tabla categorias: " + e);
-       }
-       
-       jTable_categorias.addMouseListener(new MouseAdapter(){
-           @Override
-           public void mouseClicked(MouseEvent e){
-               int fila_point = jTable_categorias.rowAtPoint(e.getPoint());
-               int columna_point = 0;
-               
-               if(fila_point > -1){
-                   idCategoria = (int) model.getValueAt(fila_point, columna_point);
-                   EnviarDatosCategoriaSeleccionada(idCategoria);
-               
-                   
-                   
-               }
-               
-           }
-           
-       
-       });
-       
-   }
-   
-   private void EnviarDatosCategoriaSeleccionada(int idCategoria){
-       try {
-           Connection con = Conexion.conectar();
-           PreparedStatement pst = con.prepareStatement(
-                   "select * from tb_categoria where idCategoria = '" + idCategoria + "'");
-           ResultSet rs = pst.executeQuery();
-           
-           if(rs.next()){
-               txt_descripcion.setText(rs.getString("descripcion"));
-           }
-           con.close();
-                   
-       } catch (SQLException e) {
-           System.out.println("Error al seleccionar categoria: " + e);
-       }
-   
-   }
-   
-   
-    
+    private void CargarTablaCategorias() {
+        Connection con = Conexion.conectar();
+        DefaultTableModel model = new DefaultTableModel();
+        String sql = "select idCategoria, descripcion, estado from tb_categoria";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            InterGestionarCategoria.jTable_categorias = new JTable(model);
+            InterGestionarCategoria.jScrollPane1.setViewportView(InterGestionarCategoria.jTable_categorias);
+
+            model.addColumn("idCategoria");
+            model.addColumn("descripcion");
+            model.addColumn("estado");
+
+            while (rs.next()) {
+                Object fila[] = new Object[3];
+                for (int i = 0; i < 3; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error al llenar la tabla categorias: " + e);
+        }
+        //evento para obtener campo al cual el usuario da click
+        //y obtener la interfaz que mostrara la informacion general
+        jTable_categorias.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = jTable_categorias.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    idCategoria = (int) model.getValueAt(fila_point, columna_point);
+                    EnviarDatosCategoriaSeleccionada(idCategoria);
+                }
+            }
+        });
+    }
+
+    /*
+     * **************************************************
+     * Metodo que envia datos seleccionados
+     * **************************************************
+     */
+    private void EnviarDatosCategoriaSeleccionada(int idCategoria) {
+        try {
+            Connection con = Conexion.conectar();
+            PreparedStatement pst = con.prepareStatement(
+                    "select * from tb_categoria where idCategoria = '" + idCategoria + "'");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                txt_descripcion.setText(rs.getString("descripcion"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar categoria: " + e);
+        }
+    }
 }

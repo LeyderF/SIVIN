@@ -5,20 +5,20 @@ package modelo;
  * @author Taszka
  */
 public class Categoria {
-
+    
     private int idCategoria;
-    private String Descripción;
+    private String descripcion;
     private int estado;
-
-    public Categoria() {
+    
+    public Categoria(){
         this.idCategoria = 0;
-        this.Descripción = "";
+        this.descripcion = "";
         this.estado = 0;
     }
 
-    public Categoria(int idCategoria, String Descripción, int estado) {
+    public Categoria(int idCategoria, String descripcion, int estado) {
         this.idCategoria = idCategoria;
-        this.Descripción = Descripción;
+        this.descripcion = descripcion;
         this.estado = estado;
     }
 
@@ -30,12 +30,12 @@ public class Categoria {
         this.idCategoria = idCategoria;
     }
 
-    public String getDescripción() {
-        return Descripción;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripción(String Descripción) {
-        this.Descripción = Descripción;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getEstado() {
@@ -45,5 +45,6 @@ public class Categoria {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-
+     
+    
 }

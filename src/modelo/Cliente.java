@@ -6,7 +6,7 @@ package modelo;
  */
 public class Cliente {
 
-    //atributos
+    //Atributos
     private int idCliente;
     private String nombre;
     private String apellido;
@@ -15,7 +15,7 @@ public class Cliente {
     private String direccion;
     private int estado;
 
-    //constructor
+    //Constructor
     public Cliente() {
         this.idCliente = 0;
         this.nombre = "";
@@ -25,8 +25,8 @@ public class Cliente {
         this.direccion = "";
         this.estado = 0;
     }
-    //constructo sobrecargado
 
+    //Constructor sobrecargado
     public Cliente(int idCliente, String nombre, String apellido, String cedula, String telefono, String direccion, int estado) {
         this.idCliente = idCliente;
         this.nombre = nombre;
@@ -37,8 +37,7 @@ public class Cliente {
         this.estado = estado;
     }
 
-    //set and get
-
+    //metodos set and get
     public int getIdCliente() {
         return idCliente;
     }
@@ -94,5 +93,5 @@ public class Cliente {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
+
 }

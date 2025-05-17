@@ -15,7 +15,7 @@ public class Usuario {
     private String telefono;
     private int estado;
 
-    //constructor
+    //Contructor vacío
     public Usuario() {
         this.idUsuario = 0;
         this.nombre = "";
@@ -27,7 +27,6 @@ public class Usuario {
     }
 
     //set and get
-
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -83,7 +82,5 @@ public class Usuario {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
-    
-    
+
 }

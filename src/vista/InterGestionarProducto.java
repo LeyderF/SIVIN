@@ -9,16 +9,16 @@ import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
-import javax.swing.table.DefaultTableModel;
-import java.sql.Statement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import javax.swing.JTable;
 import java.sql.PreparedStatement;
-import javax.swing.JOptionPane;
-import modelo.Categoria;
-import javax.swing.ImageIcon;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import modelo.Categoria;
 import modelo.Producto;
 
 /**
@@ -28,17 +28,17 @@ import modelo.Producto;
 public class InterGestionarProducto extends javax.swing.JInternalFrame {
 
     private int idProducto;
-    int ObtenerIdCategoriaCombo = 0;
+    int obtenerIdCategoriaCombo = 0;
 
     public InterGestionarProducto() {
         initComponents();
         this.setSize(new Dimension(900, 500));
         this.setTitle("Gestionar Productos");
-        //cargar tablas
+        //Cargar tabla
         this.CargarTablaProductos();
         this.CargarComboCategoria();
 
-        //insertar imagen en nuestro jlabel
+        //insertar imagen en nuestro JLabel
         ImageIcon wallpaper = new ImageIcon("src/img/fondo3.jpg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(900, 500, WIDTH));
         jLabel_wallpaper.setIcon(icono);
@@ -58,7 +58,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_producto = new javax.swing.JTable();
+        jTable_productos = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton_actualizar = new javax.swing.JButton();
         jButton_eliminar = new javax.swing.JButton();
@@ -81,16 +81,16 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Administrar Prodcutos");
+        jLabel1.setText("Administrar Productos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable_producto.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -101,8 +101,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable_producto.setEnabled(false);
-        jScrollPane1.setViewportView(jTable_producto);
+        jScrollPane1.setViewportView(jTable_productos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 250));
 
@@ -113,7 +112,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton_actualizar.setBackground(new java.awt.Color(51, 204, 0));
-        jButton_actualizar.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
+        jButton_actualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_actualizar.setText("Actualizar");
         jButton_actualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,17 +121,15 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         });
         jPanel2.add(jButton_actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jButton_eliminar.setBackground(new java.awt.Color(251, 51, 51));
-        jButton_eliminar.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
+        jButton_eliminar.setBackground(new java.awt.Color(255, 51, 51));
+        jButton_eliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_eliminar.setText("Eliminar");
-        jButton_eliminar.setMaximumSize(new java.awt.Dimension(92, 22));
-        jButton_eliminar.setPreferredSize(new java.awt.Dimension(92, 23));
         jButton_eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_eliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, -1));
+        jPanel2.add(jButton_eliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 90, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 130, 270));
 
@@ -140,60 +137,56 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nombre:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
 
-        txt_nombre.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 170, -1));
 
-        jLabel3.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Cantidad:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 90, -1));
 
-        jLabel4.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Precio:");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 90, -1));
 
-        jLabel5.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Descripcion:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 90, -1));
 
-        jLabel6.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("IVA:");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 90, -1));
 
-        jLabel7.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Categoria:");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 40, 90, -1));
 
-        txt_cantidad.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        txt_cantidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_cantidad.setEnabled(false);
         jPanel3.add(txt_cantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 170, -1));
 
-        txt_precio.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        txt_precio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 170, -1));
 
-        txt_descripcion.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        txt_descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel3.add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 40, 170, -1));
 
-        jComboBox_iva.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jComboBox_iva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione IVA:", "No grava IVA", "19%", "5%" }));
-        jComboBox_iva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_ivaActionPerformed(evt);
-            }
-        });
+        jComboBox_iva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_iva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione iva:", "No grava iva", "12%", "14%" }));
         jPanel3.add(jComboBox_iva, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, 150, -1));
 
-        jComboBox_categoria.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
-        jComboBox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoría:", "Item 2", "Item 3", "Item 4" }));
-        jPanel3.add(jComboBox_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, -1, -1));
+        jComboBox_categoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria:", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.add(jComboBox_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, 150, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 870, 100));
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 470));
@@ -211,24 +204,26 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
         categoria = jComboBox_categoria.getSelectedItem().toString().trim();
 
         //validar campos
-        if (txt_nombre.getText().equals("") || txt_cantidad.getText().isEmpty() || txt_precio.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "complete todos los campos");
+        if (txt_nombre.getText().isEmpty() || txt_cantidad.getText().isEmpty() || txt_precio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Complete todos los campos");
         } else {
-            if (iva.equalsIgnoreCase("Seleccione IVA:")) {
-                JOptionPane.showMessageDialog(null, "Seleccione IVA.");
+            if (iva.equalsIgnoreCase("Seleccione iva:")) {
+                JOptionPane.showMessageDialog(null, "Seleccione iva.");
             } else {
-                if (categoria.equalsIgnoreCase("Seleccione una categoría:")) {
+                if (categoria.equalsIgnoreCase("Seleccione categoria:")) {
                     JOptionPane.showMessageDialog(null, "Seleccione categoria");
                 } else {
                     try {
-
                         producto.setNombre(txt_nombre.getText().trim());
                         producto.setCantidad(Integer.parseInt(txt_cantidad.getText().trim()));
                         String precioTXT = "";
                         double Precio = 0.0;
                         precioTXT = txt_precio.getText().trim();
                         boolean aux = false;
-                        //si el usuario ingresa ,(coma) como si fuera un .(punto decimal) , lo transforma a punto
+                        /*
+                            *Si el usuario ingresa , (coma) como punto decimal,
+                            lo transformamos a punto (.)
+                         */
                         for (int i = 0; i < precioTXT.length(); i++) {
                             if (precioTXT.charAt(i) == ',') {
                                 String precioNuevo = precioTXT.replace(",", ".");
@@ -236,7 +231,6 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                                 aux = true;
                             }
                         }
-
                         //evaluar la condicion
                         if (aux == true) {
                             producto.setPrecio(Precio);
@@ -246,32 +240,31 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                         }
 
                         producto.setDescripcion(txt_descripcion.getText().trim());
-                        //porcentaje de IVA
-                        if (iva.equalsIgnoreCase("No grava IVA")) {
-                            producto.setPorcentajeIVA(0);
-                        } else if (iva.equalsIgnoreCase("19%")) {
-                            producto.setPorcentajeIVA(19);
-                        } else if (iva.equalsIgnoreCase("5%")) {
-                            producto.setPorcentajeIVA(5);
+                        //Porcentaje IVA
+                        if (iva.equalsIgnoreCase("No grava iva")) {
+                            producto.setPorcentajeIva(0);
+                        } else if (iva.equalsIgnoreCase("12%")) {
+                            producto.setPorcentajeIva(12);
+                        } else if (iva.equalsIgnoreCase("14%")) {
+                            producto.setPorcentajeIva(14);
                         }
 
-                        //idategoria - cargar metodo que obtiene el id de categoria
+                        //idcategoria - cargar metodo que obtiene el id de categoria
                         this.IdCategoria();
-                        producto.setIdCategoria(ObtenerIdCategoriaCombo);
+                        producto.setIdCategoria(obtenerIdCategoriaCombo);
                         producto.setEstado(1);
 
                         if (controlProducto.actualizar(producto, idProducto)) {
-                            JOptionPane.showMessageDialog(null, "Registro actualizado");
+                            JOptionPane.showMessageDialog(null, "Registro Actualizado");
                             this.CargarComboCategoria();
                             this.CargarTablaProductos();
-                            this.jComboBox_iva.setSelectedItem("Seleccione IVA:");
-                            this.limpiar();
+                            this.jComboBox_iva.setSelectedItem("Seleccione iva:");
+                            this.Limpiar();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Error al actualizar");
+                            JOptionPane.showMessageDialog(null, "Error al Actualizar");
                         }
-
                     } catch (HeadlessException | NumberFormatException e) {
-                        System.out.println("Error en:  " + e);
+                        System.out.println("Error en: " + e);
                     }
                 }
             }
@@ -282,23 +275,18 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
     private void jButton_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_eliminarActionPerformed
         Ctrl_Producto controlProducto = new Ctrl_Producto();
         if (idProducto == 0) {
-            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+            JOptionPane.showMessageDialog(null, "¡Seleccione un Producto!");
         } else {
             if (!controlProducto.eliminar(idProducto)) {
-                JOptionPane.showMessageDialog(null, "Producto eliminado");
+                JOptionPane.showMessageDialog(null, "¡Producto Eliminado!");
                 this.CargarTablaProductos();
                 this.CargarComboCategoria();
-                this.limpiar();
+                this.Limpiar();
             } else {
-                JOptionPane.showMessageDialog(null, "Error al eliminar producto");
+                JOptionPane.showMessageDialog(null, "¡Error al eliminar producto!");
             }
         }
-
     }//GEN-LAST:event_jButton_eliminarActionPerformed
-
-    private void jComboBox_ivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_ivaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox_ivaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -318,32 +306,35 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     public static javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable_producto;
+    public static javax.swing.JTable jTable_productos;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_descripcion;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
 
-    //metodo limpiar
-    private void limpiar() {
+    /*
+     * *****************************************************
+     * metodo para limpiar
+     * *****************************************************
+     */
+    private void Limpiar() {
         txt_nombre.setText("");
         txt_cantidad.setText("");
         txt_precio.setText("");
         txt_descripcion.setText("");
-        jComboBox_iva.setSelectedItem("Selecciona iva:");
-        jComboBox_categoria.setSelectedItem("Seleccion categoria:");
-
+        jComboBox_iva.setSelectedItem("Seleccione iva:");
+        jComboBox_categoria.setSelectedItem("Seleccione categoria:");
     }
 
-    /**
-     *
-     * metodo para cargar las categorias en el jcombobox
-     *
+    /*
+     * *****************************************************
+     * metodo para cargar las categorias en el JCombox
+     * *****************************************************
      */
     private void CargarComboCategoria() {
         Connection cn = Conexion.conectar();
-        String sql = " select * from tb_categoria ";
+        String sql = "select * from tb_categoria";
         Statement st;
         try {
 
@@ -357,15 +348,14 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.out.println("Error al cargar categorias");
+            System.out.println("¡Error al cargar categorias!");
         }
-
     }
 
-    /**
-     *
-     * metodo para mostrar todas los productos registradas
-     *
+    /*
+     * *****************************************************
+     * metodo para mostrar todos los productos registrados
+     * *****************************************************
      */
     String descripcionCategoria = "";
     double precio = 0.0;
@@ -373,17 +363,15 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
     double IVA = 0;
 
     private void CargarTablaProductos() {
-
         Connection con = Conexion.conectar();
         DefaultTableModel model = new DefaultTableModel();
-        String sql = "select p.idProducto, p.nombre, p.cantidad, p.precio, p.descripcion, p.porcentajeIVA, c.descripcion, p.estado from tb_producto As p, tb_categoria As c where p.idCategoria = c.idCategoria;";
+        String sql = "select p.idProducto, p.nombre, p.cantidad, p.precio, p.descripcion, p.porcentajeIva, c.descripcion, p.estado from tb_producto As p, tb_categoria As c where p.idCategoria = c.idCategoria;";
         Statement st;
-
         try {
             st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
-            InterGestionarProducto.jTable_producto = new JTable(model);
-            InterGestionarProducto.jScrollPane1.setViewportView(InterGestionarProducto.jTable_producto);
+            InterGestionarProducto.jTable_productos = new JTable(model);
+            InterGestionarProducto.jScrollPane1.setViewportView(InterGestionarProducto.jTable_productos);
 
             model.addColumn("N°");//ID
             model.addColumn("nombre");
@@ -391,7 +379,7 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
             model.addColumn("precio");
             model.addColumn("descripcion");
             model.addColumn("Iva");
-            model.addColumn("categoria");
+            model.addColumn("Categoria");
             model.addColumn("estado");
 
             while (rs.next()) {
@@ -409,53 +397,59 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                     } else {
                         fila[i] = rs.getObject(i + 1);
                     }
-
                 }
-                System.out.println(fila);
                 model.addRow(fila);
             }
-
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al llenar la tabla producto: " + e);
+            System.out.println("Error al llenar la tabla productos: " + e);
         }
-
-        jTable_producto.addMouseListener(new MouseAdapter() {
+        //evento para obtener campo al cual el usuario da click
+        //y obtener la interfaz que mostrara la informacion general
+        jTable_productos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int fila_point = jTable_producto.rowAtPoint(e.getPoint());
+                int fila_point = jTable_productos.rowAtPoint(e.getPoint());
                 int columna_point = 0;
 
                 if (fila_point > -1) {
                     idProducto = (int) model.getValueAt(fila_point, columna_point);
-                    EnviarDatosProductoSeleccionado(idProducto);
-
+                    EnviarDatosProductoSeleccionado(idProducto);//metodo
                 }
             }
-
         });
-
     }
 
-    //metodo calcular iva
+    /*
+     * **************************************************
+     * Metodo para calcular Iva
+     * **************************************************
+     */
     private double calcularIva(double precio, int iva) {
         int p_iva = iva;
         switch (p_iva) {
-            case 0 ->
+            case 0:
                 IVA = 0.0;
-            case 19 ->
-                IVA = precio * 0.19;
-            case 5 ->
-                IVA = precio * 0.05;
-            default -> {
-            }
-
+                break;
+            case 12:
+                IVA = precio * 0.12;
+                break;
+            case 14:
+                IVA = precio * 0.14;
+                break;
+            default:
+                break;
         }
         //redondear decimales
         IVA = (double) Math.round(IVA * 100) / 100;
         return IVA;
     }
 
+    /*
+     * **************************************************
+     * Metodo que envia datos seleccionados
+     * **************************************************
+     */
     private void EnviarDatosProductoSeleccionado(int idProducto) {
         try {
             Connection con = Conexion.conectar();
@@ -467,33 +461,38 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
                 txt_cantidad.setText(rs.getString("cantidad"));
                 txt_precio.setText(rs.getString("precio"));
                 txt_descripcion.setText(rs.getString("descripcion"));
-                int iva = rs.getInt(" porcentajeIva");
-
+                int iva = rs.getInt("porcentajeIva");
                 switch (iva) {
-                    case 0 ->
+                    case 0:
                         jComboBox_iva.setSelectedItem("No grava iva");
-                    case 19 ->
-                        jComboBox_iva.setSelectedItem("19%");
-                    case 5 ->
-                        jComboBox_iva.setSelectedItem("5%");
-                    default ->
-                        jComboBox_iva.setSelectedItem("Seleccione iva: ");
+                        break;
+                    case 12:
+                        jComboBox_iva.setSelectedItem("12%");
+                        break;
+                    case 14:
+                        jComboBox_iva.setSelectedItem("14%");
+                        break;
+                    default:
+                        jComboBox_iva.setSelectedItem("Seleccione iva:");
+                        break;
                 }
                 int idCate = rs.getInt("idCategoria");
                 jComboBox_categoria.setSelectedItem(relacionarCategoria(idCate));
             }
             con.close();
-
         } catch (SQLException e) {
             System.out.println("Error al seleccionar producto: " + e);
         }
-
     }
 
-    //metodo para relacionar categoria
+    /*
+     * **************************************************
+     * Metodo para relacionar categorias
+     * **************************************************
+     */
     private String relacionarCategoria(int idCategoria) {
 
-        String sql = " select descripcion from tb_categoria where idCategoria = '" + idCategoria + "' ";
+        String sql = "select descripcion from tb_categoria where idCategoria = '" + idCategoria + "'";
         Statement st;
         try {
             Connection cn = Conexion.conectar();
@@ -505,11 +504,15 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
             cn.close();
 
         } catch (SQLException e) {
-            System.out.println("Error al obtener el id de la categoria");
+            System.out.println("¡Error al obtener el id de la categoria!");
         }
         return descripcionCategoria;
     }
 
+    /**
+     *
+     * Metodo para obtener id categoria
+     */
     private int IdCategoria() {
         String sql = "select * from tb_categoria where descripcion = '" + this.jComboBox_categoria.getSelectedItem() + "'";
         Statement st;
@@ -518,12 +521,11 @@ public class InterGestionarProducto extends javax.swing.JInternalFrame {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                ObtenerIdCategoriaCombo = rs.getInt("idCategoria");
+                obtenerIdCategoriaCombo = rs.getInt("idCategoria");
             }
         } catch (SQLException e) {
-            System.out.println("Error al obtener id categoria");
+            System.out.println("Error al obener id categoria");
         }
-        return ObtenerIdCategoriaCombo;
+        return obtenerIdCategoriaCombo;
     }
-
 }

@@ -4,9 +4,9 @@ import conexion.Conexion;
 import controlador.Ctrl_Producto;
 import java.awt.Dimension;
 import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import modelo.Producto;
 
@@ -22,11 +22,10 @@ public class InterActualizarStock extends javax.swing.JInternalFrame {
 
     public InterActualizarStock() {
         initComponents();
-        setTitle("Actualizar Stock de los productos");
+        setTitle("Actualizar Stock de los Productos");
         setSize(new Dimension(400, 300));
 
-        this.CargarCombo();
-
+        this.CargarComboProductos();
     }
 
     /**
@@ -52,73 +51,73 @@ public class InterActualizarStock extends javax.swing.JInternalFrame {
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Producto:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 110, -1));
+        jLabel1.setText("Actualizar Stock de Productos");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Actualizar Stock de Productos");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Producto:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 110, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Stock Actual:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 110, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 110, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Stock Nuevo:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 110, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 110, -1));
 
-        txt_cantidad_actual.setEditable(false);
+        txt_cantidad_actual.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_cantidad_actual.setEnabled(false);
-        getContentPane().add(txt_cantidad_actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 190, -1));
-        getContentPane().add(txt_cantidad_nueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 190, -1));
+        getContentPane().add(txt_cantidad_actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 170, -1));
 
-        jComboBox_producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccion Producto:", "Item 2", "Item 3", "Item 4" }));
+        txt_cantidad_nueva.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txt_cantidad_nueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 170, -1));
+
+        jComboBox_producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione producto:", "Item 2", "Item 3", "Item 4" }));
         jComboBox_producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_productoActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 190, -1));
+        getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 170, -1));
 
-        jButton1.setBackground(new java.awt.Color(51, 255, 51));
-        jButton1.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(0, 255, 0));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 190, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 170, 30));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 270));
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 270));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_productoActionPerformed
-        // TODO add your handling code here:
-        this.mostrarStock();
+        this.MostrarStock();
     }//GEN-LAST:event_jComboBox_productoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //validamos seleccion del producto
-        if (!jComboBox_producto.getSelectedItem().equals("Seleccion Producto:")) {
-            //validamos campo vacio
+        if (!jComboBox_producto.getSelectedItem().equals("Seleccione producto:")) {
+            //Validamos campos vacios
             if (!txt_cantidad_nueva.getText().isEmpty()) {
                 //validamos que el usuario no ingrese otros caracteres no numericos
                 boolean validacion = validar(txt_cantidad_nueva.getText().trim());
-
                 if (validacion == true) {
-                    //validamos que la cantidad sea mayo a cero (0) ni negativa
+                    //validar que la cantidad sea mayor cero (0)
                     if (Integer.parseInt(txt_cantidad_nueva.getText()) > 0) {
 
                         Producto producto = new Producto();
@@ -129,29 +128,26 @@ public class InterActualizarStock extends javax.swing.JInternalFrame {
                         stockNuevo = stockActual + stockNuevo;
                         producto.setCantidad(stockNuevo);
                         if (controlProducto.actualizarStock(producto, idProducto)) {
-                            JOptionPane.showMessageDialog(null, "Stock actualizado");
-                            jComboBox_producto.setSelectedItem("Seleccion Producto:");
+                            JOptionPane.showMessageDialog(null, "Stock Actualizado");
+                            jComboBox_producto.setSelectedItem("Seleccione producto:");
                             txt_cantidad_actual.setText("");
                             txt_cantidad_nueva.setText("");
-                            this.CargarCombo();
+                            this.CargarComboProductos();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Error al actualizar stock");
+                            JOptionPane.showMessageDialog(null, "Error al Actualizar Stock");
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(null, "La cantidad no puede ser cero ni negativa");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "En la Cantidad no se admiten caracteres no numericos");
+                    JOptionPane.showMessageDialog(null, "En la cantidad no se admiten caracteres no numericos");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Ingrese una nueva cantidad para sumar el stock del producto");
             }
-
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione un producto ");
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -166,16 +162,19 @@ public class InterActualizarStock extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_cantidad_actual;
     private javax.swing.JTextField txt_cantidad_nueva;
     // End of variables declaration//GEN-END:variables
-//metodo para cargar los productos en el jcombo box
-    private void CargarCombo() {
+
+    //Metodo para caragar los productos en el jComboBox
+    private void CargarComboProductos() {
+
         Connection cn = Conexion.conectar();
         String sql = "select * from tb_producto";
         Statement st;
         try {
+
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             jComboBox_producto.removeAllItems();
-            jComboBox_producto.addItem("Seleccion Producto:");
+            jComboBox_producto.addItem("Seleccione producto:");
             while (rs.next()) {
                 jComboBox_producto.addItem(rs.getString("nombre"));
             }
@@ -186,9 +185,10 @@ public class InterActualizarStock extends javax.swing.JInternalFrame {
 
     }
 
-    //metodo para mostrar el stock del producto seleccionado
-    private void mostrarStock() {
+    //metodo para mostrar stock del producto seleccionado
+    private void MostrarStock() {
         try {
+
             Connection cn = Conexion.conectar();
             String sql = "select * from tb_producto where nombre = '" + this.jComboBox_producto.getSelectedItem() + "'";
             Statement st;
@@ -202,9 +202,8 @@ public class InterActualizarStock extends javax.swing.JInternalFrame {
             } else {
                 txt_cantidad_actual.setText("");
             }
-
         } catch (SQLException e) {
-            System.out.println("Error al cargar al obtener stock del producto : " + e);
+            System.out.println("Error al obtener stock del producto en: " + e);
         }
     }
 
@@ -212,10 +211,8 @@ public class InterActualizarStock extends javax.swing.JInternalFrame {
     private boolean validar(String valor) {
         int num;
         try {
-
             num = Integer.parseInt(valor);
             return true;
-
         } catch (NumberFormatException e) {
             return false;
         }

@@ -10,7 +10,7 @@ import modelo.CabeceraVenta;
 import modelo.DetalleVenta;
 
 /**
- * @author edison
+ * @author Taszkan
  */
 public class Ctrl_RegistrarVenta {
     
@@ -21,8 +21,6 @@ public class Ctrl_RegistrarVenta {
      * **************************************************
      * metodo para guardar la cabecera de venta
      * **************************************************
-     * @param objeto
-     * @return 
      */
     public boolean guardar(CabeceraVenta objeto) {
         boolean respuesta = false;
@@ -57,8 +55,6 @@ public class Ctrl_RegistrarVenta {
      * **************************************************
      * metodo para guardar el detalle de venta
      * **************************************************
-     * @param objeto
-     * @return 
      */
     public boolean guardarDetalle(DetalleVenta objeto) {
         boolean respuesta = false;
@@ -75,7 +71,7 @@ public class Ctrl_RegistrarVenta {
             consulta.setDouble(8, objeto.getIva());
             consulta.setDouble(9, objeto.getTotalPagar());
             consulta.setInt(10, objeto.getEstado());
-    
+            
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
             }
@@ -85,4 +81,29 @@ public class Ctrl_RegistrarVenta {
         }
         return respuesta;
     }
+    /**
+     * **************************************************
+     * metodo para actualizar un producto
+     * **************************************************
+     */
+    public boolean actualizar(CabeceraVenta objeto, int idCabeceraVenta) {
+        boolean respuesta = false;
+        Connection cn = Conexion.conectar();
+        try {
+
+            PreparedStatement consulta = cn.prepareStatement(
+                    "update tb_cabecera_venta set idCliente=?, estado = ? where idCabeceraVenta ='" + idCabeceraVenta + "'");
+            consulta.setInt(1, objeto.getIdCliente());
+            consulta.setInt(2, objeto.getEstado());
+           
+            if (consulta.executeUpdate() > 0) {
+                respuesta = true;
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar cabecera de venta: " + e);
+        }
+        return respuesta;
+    }
+    
 }

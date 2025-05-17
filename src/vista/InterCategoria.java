@@ -14,7 +14,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
     public InterCategoria() {
         initComponents();
         this.setSize(new Dimension(400, 200));
-        this.setTitle("Nueva Categoría");
+        this.setTitle("Nueva Categoria");
     }
 
     /**
@@ -36,22 +36,21 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Nueva Categoría");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+        jLabel1.setText("Nueva Categoria");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Descripción Categoría: ");
+        jLabel2.setText("Descripcion categoria:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        txt_descripcion.setFont(new java.awt.Font("Inter", 0, 12)); // NOI18N
+        txt_descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 170, -1));
 
-        jButton1.setBackground(new java.awt.Color(27, 170, 237));
-        jButton1.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setBackground(new java.awt.Color(0, 204, 204));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,34 +66,28 @@ public class InterCategoria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
 
         Categoria categoria = new Categoria();
         Ctrl_Categoria controlCategoria = new Ctrl_Categoria();
 
+        //validamos camoos vacios
         if (txt_descripcion.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Complete todos los campos");
+            JOptionPane.showMessageDialog(null, "Complete  todos los campos");
         } else {
-
             if (!controlCategoria.existeCategoria(txt_descripcion.getText().trim())) {
-                categoria.setDescripción(txt_descripcion.getText().trim());
+                categoria.setDescripcion(txt_descripcion.getText().trim());
                 categoria.setEstado(1);
-
                 if (controlCategoria.guardar(categoria)) {
                     JOptionPane.showMessageDialog(null, "Registro Guardado");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al guardar");
+                    JOptionPane.showMessageDialog(null, "Error al Guardar");
                 }
-
             } else {
-                JOptionPane.showMessageDialog(null, "La categoria ya esta registrada en la base de datos");
+                JOptionPane.showMessageDialog(null, "La Categoria ya esta registrada en la Base de Datos");
             }
-            
         }
         //limpiar campo
         txt_descripcion.setText("");
-        
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
