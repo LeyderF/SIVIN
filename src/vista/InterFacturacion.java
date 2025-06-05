@@ -691,11 +691,11 @@ public class InterFacturacion extends javax.swing.JInternalFrame {
             case 0:
                 iva = 0.0;
                 break;
-            case 12:
-                iva = (precio * cantidad) * 0.12;
+            case 5:
+                iva = (precio * cantidad) * 0.5;
                 break;
-            case 14:
-                iva = (precio * cantidad) * 0.14;
+            case 19:
+                iva = (precio * cantidad) * 0.19;
                 break;
             default:
                 break;

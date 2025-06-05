@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/FrmMenu.java</file>
+            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterGestionarVentas.java</file>
+            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterFacturacion.java</file>
+            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterProducto.java</file>
+            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterGestionarProducto.java</file>
             <file>file:/home/taszka/NetBeansProjects/SIVIN/src/controlador/Reportes.java</file>
-            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/FrmLogin.java</file>
-            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterGraficaVentas.java</file>
-            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterGraficas.java</file>
+            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/controlador/Ctrl_Proveedor.java</file>
+            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterProveedor.java</file>
+            <file>file:/home/taszka/NetBeansProjects/SIVIN/src/vista/InterGestionarProveedor.java</file>
         </group>
     </open-files>
 </project-private>

@@ -63,8 +63,11 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem_reportes_categorias = new javax.swing.JMenuItem();
         jMenuItem_reportes_productos = new javax.swing.JMenuItem();
         jMenuItem_reportes_ventas = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem_verHistorial1 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem_verHistorial = new javax.swing.JMenuItem();
+        jMenuItem_verHistorial2 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem_cerrar_sesion = new javax.swing.JMenuItem();
 
@@ -282,21 +285,50 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu_reportes_productos);
 
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
-        jMenu7.setText("Historial");
+        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
+        jMenu9.setText("Historial");
+        jMenu9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jMenu9.setPreferredSize(new java.awt.Dimension(150, 50));
+
+        jMenuItem_verHistorial1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem_verHistorial1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
+        jMenuItem_verHistorial1.setText("Ver Historial");
+        jMenuItem_verHistorial1.setPreferredSize(new java.awt.Dimension(150, 30));
+        jMenuItem_verHistorial1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_verHistorial1ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem_verHistorial1);
+
+        jMenuBar1.add(jMenu9);
+
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proveedor(1).png"))); // NOI18N
+        jMenu7.setText("Proveedores");
         jMenu7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jMenu7.setPreferredSize(new java.awt.Dimension(150, 50));
 
         jMenuItem_verHistorial.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jMenuItem_verHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/historial1.png"))); // NOI18N
-        jMenuItem_verHistorial.setText("Ver Historial");
-        jMenuItem_verHistorial.setPreferredSize(new java.awt.Dimension(150, 30));
+        jMenuItem_verHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proveedor(1).png"))); // NOI18N
+        jMenuItem_verHistorial.setText("Añadir Proveedor");
+        jMenuItem_verHistorial.setPreferredSize(new java.awt.Dimension(200, 30));
         jMenuItem_verHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem_verHistorialActionPerformed(evt);
             }
         });
         jMenu7.add(jMenuItem_verHistorial);
+
+        jMenuItem_verHistorial2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jMenuItem_verHistorial2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proveedor(1).png"))); // NOI18N
+        jMenuItem_verHistorial2.setText("Gestionar Proveedores");
+        jMenuItem_verHistorial2.setPreferredSize(new java.awt.Dimension(250, 30));
+        jMenuItem_verHistorial2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_verHistorial2ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem_verHistorial2);
 
         jMenuBar1.add(jMenu7);
 
@@ -415,10 +447,25 @@ public class FrmMenu extends javax.swing.JFrame {
 
     private void jMenuItem_verHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_verHistorialActionPerformed
         // TODO add your handling code here:
-        InterGraficas intergraficas = new InterGraficas();
+        InterProveedor interProveedor = new InterProveedor();
+        jDesktopPane_menu.add(interProveedor);
+        interProveedor.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_verHistorialActionPerformed
+
+    private void jMenuItem_verHistorial1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_verHistorial1ActionPerformed
+        // TODO add your handling code here:
+        InterGraficas intergraficas  = new InterGraficas();
         jDesktopPane_menu.add(intergraficas);
         intergraficas.setVisible(true);
-    }//GEN-LAST:event_jMenuItem_verHistorialActionPerformed
+    }//GEN-LAST:event_jMenuItem_verHistorial1ActionPerformed
+
+    private void jMenuItem_verHistorial2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_verHistorial2ActionPerformed
+        // TODO add your handling code here:
+        InterGestionarProveedor interGestionarProveedor = new InterGestionarProveedor();
+        jDesktopPane_menu.add(interGestionarProveedor);
+        interGestionarProveedor.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem_verHistorial2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -463,6 +510,7 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem3_nuevo_producto;
@@ -483,6 +531,8 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_reportes_productos;
     private javax.swing.JMenuItem jMenuItem_reportes_ventas;
     private javax.swing.JMenuItem jMenuItem_verHistorial;
+    private javax.swing.JMenuItem jMenuItem_verHistorial1;
+    private javax.swing.JMenuItem jMenuItem_verHistorial2;
     private javax.swing.JMenu jMenu_reportes_productos;
     // End of variables declaration//GEN-END:variables
 }

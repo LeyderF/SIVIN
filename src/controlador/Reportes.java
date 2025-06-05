@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Edison Zambrano
+ * @
  */
 public class Reportes {
 
@@ -112,7 +112,7 @@ public class Reportes {
             documento.add(header);
             documento.add(parrafo);
             
-            float[] columnsWidths = {3, 5, 4, 5, 7, 5, 6};
+            float[] columnsWidths = {5, 5, 4, 5, 7, 5, 6, 7};
 
             PdfPTable tabla = new PdfPTable(columnsWidths);
             tabla.addCell("Codigo");
@@ -122,14 +122,15 @@ public class Reportes {
             tabla.addCell("Descripcion");
             tabla.addCell("Por. Iva");
             tabla.addCell("Categoria");
+            tabla.addCell("Proveedor");
+            
 
             try {
                 Connection cn = Conexion.conectar();
-                PreparedStatement pst = cn.prepareStatement(
-                        "select p.idProducto, p.nombre, p.cantidad, p.precio, p.descripcion, "
-                                + "p.porcentajeIva, c.descripcion as categoria, p.estado "
-                                + "from tb_producto as p, tb_categoria as c "
-                                + "where p.idCategoria = c.idCategoria;");
+                PreparedStatement pst = cn.prepareStatement("""
+                                                            SELECT p.idProducto, p.nombre, p.cantidad, p.precio, p.descripcion, p.porcentajeIva, c.descripcion, pr.nombre, p.estado
+                                                            FROM tb_producto AS p, tb_categoria AS c, tb_proveedor AS pr
+                                                            WHERE p.idCategoria = c.idCategoria AND p.idProveedor = pr.idProveedor""");
                 ResultSet rs = pst.executeQuery();
                 if (rs.next()) {
                     do {
@@ -140,6 +141,7 @@ public class Reportes {
                         tabla.addCell(rs.getString(5));
                         tabla.addCell(rs.getString(6));
                         tabla.addCell(rs.getString(7));
+                        tabla.addCell(rs.getString(8));
                     } while (rs.next());
                     documento.add(tabla);
                 }

@@ -14,6 +14,7 @@ public class Producto {
     private String descripcion;
     private int porcentajeIva;
     private int idCategoria;
+    private int idProveedor;
     private int estado;
     
     //Contructor
@@ -25,10 +26,11 @@ public class Producto {
         this.descripcion = "";
         this.porcentajeIva = 0;
         this.idCategoria = 0;
+        this.idProveedor = 0;
         this.estado = 0;
     }
     //Contructor sobrecargado
-    public Producto(int idProducto, String nombre, int cantidad, double precio, String descripcion, int porcentajeIva, int idCategoria, int estado) {
+    public Producto(int idProducto, String nombre, int cantidad, double precio, String descripcion, int porcentajeIva, int idCategoria, int idProveedor, int estado) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.cantidad = cantidad;
@@ -36,10 +38,18 @@ public class Producto {
         this.descripcion = descripcion;
         this.porcentajeIva = porcentajeIva;
         this.idCategoria = idCategoria;
+        this.idProveedor = idProveedor;
         this.estado = estado;
     }
     
+    public int getIdProveedor() {
+        return idProveedor;
+    }
+
     //Set and get
+    public void setIdProveedor(int idProveedor) {
+        this.idProveedor = idProveedor;
+    }
 
     public int getIdProducto() {
         return idProducto;

@@ -10,7 +10,7 @@ import modelo.Cliente;
 
 /**
  *
- * @author Edison Zambrano - © Programador Fantasma
+ * @
  */
 public class Ctrl_Cliente {
 

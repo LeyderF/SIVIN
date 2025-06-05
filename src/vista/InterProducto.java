@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import modelo.Producto;
+import modelo.Proveedor;
 
 /**
  *
@@ -19,13 +20,15 @@ import modelo.Producto;
 public class InterProducto extends javax.swing.JInternalFrame {
 
     int obtenerIdCategoriaCombo = 0;
+    int obtenerIdProveedorCombo = 0;
 
     public InterProducto() {
         initComponents();
-        this.setSize(new Dimension(400, 300));
+        this.setSize(new Dimension(400, 350));
         this.setTitle("Nuevo Producto");
 
         this.CargarComboCategorias();
+        this.CargarComboProveedores();
     }
 
     /**
@@ -44,12 +47,14 @@ public class InterProducto extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         txt_cantidad = new javax.swing.JTextField();
         txt_precio = new javax.swing.JTextField();
         txt_descripcion = new javax.swing.JTextField();
         jComboBox_iva = new javax.swing.JComboBox<>();
         jComboBox_categoria = new javax.swing.JComboBox<>();
+        jComboBox_proveedor = new javax.swing.JComboBox<>();
         jButton_Guardar = new javax.swing.JButton();
         jLabel_wallpaper = new javax.swing.JLabel();
 
@@ -98,6 +103,12 @@ public class InterProducto extends javax.swing.JInternalFrame {
         jLabel7.setText("Categorias:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 90, -1));
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Proveedores");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 90, -1));
+
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 170, -1));
 
@@ -111,12 +122,16 @@ public class InterProducto extends javax.swing.JInternalFrame {
         getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 170, -1));
 
         jComboBox_iva.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jComboBox_iva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione iva:", "No grava iva", "12%", "14%" }));
+        jComboBox_iva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione iva:", "No grava iva", "5%", "19%" }));
         getContentPane().add(jComboBox_iva, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 170, -1));
 
         jComboBox_categoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jComboBox_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria:", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 170, -1));
+
+        jComboBox_proveedor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jComboBox_proveedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione proveedor:", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox_proveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 170, -1));
 
         jButton_Guardar.setBackground(new java.awt.Color(0, 204, 204));
         jButton_Guardar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -126,10 +141,10 @@ public class InterProducto extends javax.swing.JInternalFrame {
                 jButton_GuardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 230, 90, 30));
+        getContentPane().add(jButton_Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 90, 30));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 280));
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,8 +155,10 @@ public class InterProducto extends javax.swing.JInternalFrame {
         Ctrl_Producto controlProducto = new Ctrl_Producto();
         String iva = "";
         String categoria = "";
+        String proveedor = "";
         iva = jComboBox_iva.getSelectedItem().toString().trim();
         categoria = jComboBox_categoria.getSelectedItem().toString().trim();
+        proveedor = jComboBox_proveedor.getSelectedItem().toString().trim();
 
         //validar campos
         if (txt_nombre.getText().equals("") || txt_cantidad.getText().equals("") || txt_precio.getText().equals("")) {
@@ -188,16 +205,22 @@ public class InterProducto extends javax.swing.JInternalFrame {
                             //Porcentaje IVA
                             if (iva.equalsIgnoreCase("No grava iva")) {
                                 producto.setPorcentajeIva(0);
-                            } else if (iva.equalsIgnoreCase("12%")) {
-                                producto.setPorcentajeIva(12);
-                            } else if (iva.equalsIgnoreCase("14%")) {
-                                producto.setPorcentajeIva(14);
+                            } else if (iva.equalsIgnoreCase("5%")) {
+                                producto.setPorcentajeIva(5);
+                            } else if (iva.equalsIgnoreCase("19%")) {
+                                producto.setPorcentajeIva(19);
                             }
 
                             //idcategoria - cargar metodo que obtiene el id de categoria
                             this.IdCategoria();
                             producto.setIdCategoria(obtenerIdCategoriaCombo);
+                            this.IdProveedor();
+                            producto.setIdProveedor(obtenerIdProveedorCombo);
                             producto.setEstado(1);
+                            
+                            
+                            
+                            
 
                             if (controlProducto.guardar(producto)) {
                                 JOptionPane.showMessageDialog(null, "Registro Guardado");
@@ -206,6 +229,7 @@ public class InterProducto extends javax.swing.JInternalFrame {
                                 txt_precio.setBackground(Color.green);
                                 txt_descripcion.setBackground(Color.green);
 
+                                this.CargarComboProveedores();
                                 this.CargarComboCategorias();
                                 this.jComboBox_iva.setSelectedItem("Seleccione iva:");
                                 this.Limpiar();
@@ -229,6 +253,7 @@ public class InterProducto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton_Guardar;
     private javax.swing.JComboBox<String> jComboBox_categoria;
     private javax.swing.JComboBox<String> jComboBox_iva;
+    private javax.swing.JComboBox<String> jComboBox_proveedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -236,6 +261,7 @@ public class InterProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_descripcion;
@@ -279,6 +305,27 @@ public class InterProducto extends javax.swing.JInternalFrame {
         }
     }
 
+    private void CargarComboProveedores() {
+        Connection cn = Conexion.conectar();
+        String sql = "select * from tb_proveedor";
+        Statement st;
+
+        try {
+
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            jComboBox_proveedor.removeAllItems();
+            jComboBox_proveedor.addItem("Seleccione proveedor:");
+            while (rs.next()) {
+                jComboBox_proveedor.addItem(rs.getString("nombre"));
+            }
+            cn.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al cargar proveedor");
+        }
+    }
+    
     /**
      *
      * Metodo para obtener id categoria
@@ -298,4 +345,23 @@ public class InterProducto extends javax.swing.JInternalFrame {
         }
         return obtenerIdCategoriaCombo;
     }
+    
+    
+    private int IdProveedor() {
+        String sql = "select * from tb_proveedor where nombre = '" + this.jComboBox_proveedor.getSelectedItem() + "'";
+        Statement st;
+        try {
+            Connection cn = Conexion.conectar();
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                obtenerIdProveedorCombo = rs.getInt("idProveedor");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al obener id proveedor");
+        }
+        return obtenerIdProveedorCombo;
+    }
+    
+    
 }
